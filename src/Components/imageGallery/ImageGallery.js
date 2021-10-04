@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Loader from "react-loader-spinner";
-import ImageGalleryItem from './ImageGalleryItem';
-import galleryAPI from '../services/gallery-api';
-import Button from './Button';
-import Modal from './Modal';
+import ImageGalleryItem from '../imageGalleryItem/ImageGalleryItem';
+import galleryAPI from '../../services/gallery-api';
+import Button from '../button/Button';
+import Modal from '../modal/Modal';
+import galleryStyle from './ImageGalleryStyled';
 
 class ImageGallery extends Component {
     state = { 
@@ -48,7 +49,7 @@ class ImageGallery extends Component {
     findTargetImg = (e) => {
         const id = e.currentTarget.id;
         const targetElement = this.state.images.find((item) => item.id == id);
-        console.log(targetElement);
+
         this.setState((prev) => ({
           isModalOpen: !prev.isModalOpen,
           targetImg: {...targetElement}
@@ -65,7 +66,7 @@ class ImageGallery extends Component {
         const {images, error, status, isModalOpen, targetImg} = this.state;
 
         if(status === 'idle') {
-            return <div>Enter an image tag, please.</div>;
+            return <galleryStyle.DivContainer>Enter an image tag, please.</galleryStyle.DivContainer>;
         };
 
         if(status === 'pending') {
@@ -84,16 +85,16 @@ class ImageGallery extends Component {
 
         if(status === 'resolved') {
             return (
-                <>
-                <ul className="ImageGallery">
-                    {images.map((item) => 
-                        <ImageGalleryItem imgUrl={item.webformatURL} imgAlt={item.tags} 
-                        imgId={item.id} onClick={this.findTargetImg}/>
-                    )}
-                </ul>
-                <Button onClick={this.loadMore}></Button>
-                {isModalOpen && <Modal image={targetImg} toggleModal={this.toggleModal}/>}
-                </>
+                <galleryStyle.GalleryContainer>
+                    <ul className="ImageGallery">
+                        {images.map((item) => 
+                            <ImageGalleryItem imgUrl={item.webformatURL} imgAlt={item.tags} 
+                            imgId={item.id} onClick={this.findTargetImg}/>
+                        )}
+                    </ul>
+                    {images.length > 0 && <Button onClick={this.loadMore}></Button>}
+                    {isModalOpen && <Modal image={targetImg} toggleModal={this.toggleModal}/>}
+                </galleryStyle.GalleryContainer>
             );
         };
     };

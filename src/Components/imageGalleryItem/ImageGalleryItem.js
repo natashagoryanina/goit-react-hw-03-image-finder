@@ -1,10 +1,11 @@
 import React from 'react';
+import {ImageItemContainer} from './ImageGalleryItemStyled';
 
 const ImageGalleryItem = ({imgUrl, imgAlt, imgId, onClick}) => {
     return (
-        <li className="ImageGalleryItem">
+        <ImageItemContainer>
             <img src={imgUrl} alt={imgAlt} key={imgId} id={imgId} onClick={onClick} className="ImageGalleryItem-image" />
-        </li>
+        </ImageItemContainer>
     );
 }
 
