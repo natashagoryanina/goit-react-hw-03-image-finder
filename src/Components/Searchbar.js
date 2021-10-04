@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 class Searchbar extends Component {
     state = { 
         imageTag: ''
-     }
+    };
 
     handleNameChange = (e) => {
         this.setState({imageTag: e.currentTarget.value.toLowerCase() });
@@ -13,9 +13,9 @@ class Searchbar extends Component {
     handleSubmit = (e) => {
         e.preventDefault();
         if(this.state.imageTag.trim() === '') {
-            toast('Enter an image tag, please.')
+            toast.error('Enter an image tag, please.');
             return;
-        }
+        };
         this.props.onSubmit(this.state.imageTag);
         this.setState({imageTag: ''});
     };
@@ -41,7 +41,7 @@ class Searchbar extends Component {
             </form>
         </header>
         );
-    }
-}
+    };
+};
 
 export default Searchbar;

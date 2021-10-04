@@ -21,7 +21,7 @@ class App extends Component {
                 <ImageGallery image={this.state.image}/>
             </main>
         );
-    }
-}
+    };
+};
 
 export default App;

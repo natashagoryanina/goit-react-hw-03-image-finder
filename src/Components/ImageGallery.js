@@ -14,7 +14,7 @@ class ImageGallery extends Component {
         page: 1,
         isModalOpen: false,
         targetImg: {}
-    }
+    };
 
     componentDidUpdate(prevProps, prevState) {
         const prevImg = prevProps.image;
@@ -23,7 +23,7 @@ class ImageGallery extends Component {
         if (prevImg !== nextImg) {
             this.loadImages(nextImg);
         }
-    }
+    };
 
     loadImages = (nextImg) => {
         this.setState({ status: 'pending', page: 1})
@@ -45,7 +45,7 @@ class ImageGallery extends Component {
             ));
     };
 
-    toggleModal = (e) => {
+    findTargetImg = (e) => {
         const id = e.currentTarget.id;
         const targetElement = this.state.images.find((item) => item.id == id);
         console.log(targetElement);
@@ -55,6 +55,11 @@ class ImageGallery extends Component {
         }));
     };
 
+    toggleModal = () => {
+        this.setState((prev) => ({
+          isModalOpen: !prev.isModalOpen
+        }));
+    };
 
     render() {
         const {images, error, status, isModalOpen, targetImg} = this.state;
@@ -83,16 +88,16 @@ class ImageGallery extends Component {
                 <ul className="ImageGallery">
                     {images.map((item) => 
                         <ImageGalleryItem imgUrl={item.webformatURL} imgAlt={item.tags} 
-                        imgId={item.id} onClick={this.toggleModal}/>
+                        imgId={item.id} onClick={this.findTargetImg}/>
                     )}
                 </ul>
                 <Button onClick={this.loadMore}></Button>
-                {isModalOpen && <Modal image={targetImg}/>}
+                {isModalOpen && <Modal image={targetImg} toggleModal={this.toggleModal}/>}
                 </>
             );
         };
-    }
-}
+    };
+};
 
 export default ImageGallery;
 
