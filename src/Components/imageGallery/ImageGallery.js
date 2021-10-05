@@ -23,7 +23,14 @@ class ImageGallery extends Component {
 
         if (prevImg !== nextImg) {
             this.loadImages(nextImg);
-        }
+        };
+
+        if(prevProps.images !== prevState.images) {
+            window.scrollTo({
+                top: document.documentElement.scrollHeight,
+                behavior: "smooth",
+            });
+        };
     };
 
     loadImages = (nextImg) => {
