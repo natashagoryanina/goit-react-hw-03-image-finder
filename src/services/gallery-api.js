@@ -11,6 +11,12 @@ function fetchGallery (imageTag, page) {
                 new Error(`Cannot find ${imageTag} image`),
             );
         })
+        .then((data) => {
+            if(data.hits.length) {
+                return data;
+            };
+            throw new Error(`Cannot find ${imageTag} image`);
+        })
 };
 
 const api = {
