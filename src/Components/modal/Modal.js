@@ -3,6 +3,24 @@ import { ModalContainer } from './ModalStyled';
 
 class Modal extends Component {
 
+    componentDidMount() {
+        window.addEventListener("keydown", this.onEscapeClose);
+        const body = document.querySelector("body");
+        body.style.overflow = "hidden"; 
+    };
+
+    componentWillUnmount() {
+        window.removeEventListener("keydown", this.onEscapeClose);
+        const body = document.querySelector("body");
+        body.style.overflow = "auto";
+    };
+
+    onEscapeClose = (e) => {
+        if (e.code === "Escape") {
+            this.props.toggleModal();
+        }
+    };
+
     closeModal = (e) => {
         if(e.target === e.currentTarget) {
             const overlay = document.querySelector('.Overlay');

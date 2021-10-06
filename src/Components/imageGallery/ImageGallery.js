@@ -25,7 +25,7 @@ class ImageGallery extends Component {
             this.loadImages(nextImg);
         };
 
-        if(prevProps.images !== prevState.images) {
+        if(this.state.images !== prevState.images) {
             window.scrollTo({
                 top: document.documentElement.scrollHeight,
                 behavior: "smooth",
