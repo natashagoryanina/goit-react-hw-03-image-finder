@@ -53,13 +53,20 @@ class ImageGallery extends Component {
             ));
     };
 
-    findTargetImg = (e) => {
-        const id = e.currentTarget.id;
-        const targetElement = this.state.images.find((item) => item.id == id);
+    // findTargetImg = (e) => {
+    //     const id = e.currentTarget.id;
+    //     const targetElement = this.state.images.find((item) => item.id == id);
 
+    //     this.setState((prev) => ({
+    //       isModalOpen: !prev.isModalOpen,
+    //       targetImg: {...targetElement}
+    //     }));
+    // };
+
+    findTargetImg = (largeImgObj) => {
         this.setState((prev) => ({
           isModalOpen: !prev.isModalOpen,
-          targetImg: {...targetElement}
+          targetImg: largeImgObj
         }));
     };
 
@@ -96,7 +103,7 @@ class ImageGallery extends Component {
                     <ul className="ImageGallery">
                         {images.map((item) => 
                             <ImageGalleryItem imgUrl={item.webformatURL} imgAlt={item.tags} 
-                            imgId={item.id} onClick={this.findTargetImg}/>
+                            largeImg={item.largeImageURL} imgId={item.id} onClick={this.findTargetImg}/>
                         )}
                     </ul>
                     {images.length > 0 && <Button onClick={this.loadMore}></Button>}

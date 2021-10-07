@@ -35,7 +35,7 @@ class Modal extends Component {
             <ModalContainer>
                 <div className="Overlay" onClick={this.closeModal}>
                     <div className="Modal">
-                        <img src={image.largeImageURL} alt={image.tags} key={image.id}/>
+                        <img src={image.largeImg} alt={image.imgAlt}/>
                     </div>
                 </div>
             </ModalContainer>
